@@ -5,7 +5,7 @@ const Navbar = () => {
     <header className="site-header">
       <a className="brand" href="#home" aria-label="Go to home">
         <span className="brand-mark">VD</span>
-        <span>Vishal Das</span>
+        <span>Vishaldas</span>
       </a>
       <nav className="nav-links" aria-label="Primary navigation">
         <a href="#work">Projects</a>
