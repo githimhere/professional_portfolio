@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import CanvasBackground from './components/CanvasBackground';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -92,6 +93,7 @@ function App() {
         <SkillsTimeline />
         <Contact />
       </main>
+      <Analytics />
     </>
   );
 }
