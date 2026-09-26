@@ -22,7 +22,7 @@ const Contact = () => {
           <article>
             <span>Certification</span>
             <h3>Prompt Engineering</h3>
-            <p>LinkedIn learning signal from resume</p>
+            <p>LinkedIn Learning</p>
           </article>
           <article>
             <span>Recognition</span>
