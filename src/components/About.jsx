@@ -5,7 +5,7 @@ const About = () => {
     <>
       <section className="metric-strip" aria-label="Professional highlights">
         <div>
-          <strong>9+ yrs</strong>
+          <strong>10+ yrs</strong>
           <span>MarTech and delivery experience</span>
         </div>
         <div>
