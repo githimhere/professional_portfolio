@@ -1,6 +1,6 @@
 # Vishal Das - Portfolio
 
-[Visit my portfolio](https://www.meetvishaldas.com) | [LinkedIn](https://www.linkedin.com/in/vishaldas)
+[Visit my portfolio](https://www.meetvishaldas.com) | [LinkedIn](https://www.linkedin.com/in/vishaldas-marketing-automation/)
 
 This repository contains a React/Vite version of my professional portfolio. The public website is the best place to see my current work; this repository may not match the latest live deployment.
 
