@@ -5,11 +5,11 @@ const Projects = () => {
     <section className="section" id="work">
       <div className="section-heading">
         <p className="eyebrow">Selected Work</p>
-        <h2>Selected work recruiters can scan in seconds.</h2>
+        <h2>Enterprise MarTech delivery, end to end.</h2>
       </div>
       <div className="recruiter-note">
         <span>Recruiter snapshot</span>
-        <p>Enterprise MarTech delivery, automation architecture, campaign operations, dashboards, governance, and adoption.</p>
+        <p>Enterprise MarTech program delivery, end-to-end project management, onboarding, automation architecture, campaign operations, dashboards, and governance.</p>
       </div>
       <div className="project-grid">
         <article className="project-card tilt-card">
