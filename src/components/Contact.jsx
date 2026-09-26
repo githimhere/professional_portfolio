@@ -51,7 +51,7 @@ const Contact = () => {
           <a href="mailto:vishaldas94@outlook.com">Email</a>
           <a href="https://www.linkedin.com/in/vishaldas-marketing-automation/" target="_blank" rel="noreferrer">LinkedIn</a>
           <a href="https://github.com/githimhere" target="_blank" rel="noreferrer">GitHub</a>
-          <a href="https://drive.google.com/file/d/1uPnwInl84k13sh-dS-cB1zb1Owck0zDJ/view?usp=sharing" target="_blank" rel="noreferrer">Request Resume</a>
+          <a href="https://drive.google.com/file/d/1uPnwInl84k13sh-dS-cB1zb1Owck0zDJ/view?usp=drivesdk" target="_blank" rel="noopener noreferrer">Download Resume</a>
         </div>
       </section>
     </>
