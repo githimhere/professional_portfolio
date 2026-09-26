@@ -13,8 +13,8 @@ const About = () => {
           <span>Email, SMS, and WhatsApp automation</span>
         </div>
         <div>
-          <strong>500+</strong>
-          <span>LinkedIn connections</span>
+          <strong>5+ platforms</strong>
+          <span>Enterprise platform delivery</span>
         </div>
         <div>
           <strong>2024</strong>
