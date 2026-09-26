@@ -1,16 +1,16 @@
-# React + Vite
+# Vishal Das - Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Visit my portfolio](https://www.meetvishaldas.com) | [LinkedIn](https://www.linkedin.com/in/vishaldas)
 
-Currently, two official plugins are available:
+This repository contains a React/Vite version of my professional portfolio. The public website is the best place to see my current work; this repository may not match the latest live deployment.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The portfolio covers my work in enterprise delivery and operations, along with the products I build outside work, including [Aura Journal](https://github.com/githimhere/aura-journal-app).
 
-## React Compiler
+## Run this repository locally
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+For a production build, run `npm run build`. This project uses React, Vite and Vercel Analytics. The portfolio site is at [meetvishaldas.com](https://www.meetvishaldas.com).
