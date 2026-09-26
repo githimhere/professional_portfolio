@@ -21,10 +21,10 @@ const Hero = () => {
         <div className="orbit-ring ring-two"></div>
         <div className="profile-card tilt-card">
           <div className="profile-image">
-            <img src="/assets/vishal-das.jpg" alt="Portrait of Vishaldas Mohandas" />
+            <img src="/assets/vishal-das.jpg" alt="Portrait of Vishal Das" />
           </div>
           <div className="profile-meta">
-            <strong>Vishaldas Mohandas</strong>
+            <strong>Vishal Das</strong>
             <span>Delivery Manager | Marketing Automation</span>
           </div>
         </div>
