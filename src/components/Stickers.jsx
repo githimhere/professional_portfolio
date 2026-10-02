@@ -36,7 +36,7 @@ export const HeroStickers = () => (
   </div>
 );
 
-const TAPE = ['ZMP', 'Marketo', 'SAP Hybris', 'Twilio', 'SINCH', 'Agent Chatbot', 'GenAI Workflows', 'Dashboards', 'UAT & QA', 'Lead Conversion'];
+const TAPE = ['ZMP', 'Marketo', 'SAP Hybris', 'Acoustic', 'BlueVenn', 'Agent Chatbot', 'GenAI Workflows', 'Dashboards', 'UAT & QA', 'Lead Conversion'];
 
 const Row = () => (
   <>
@@ -52,4 +52,15 @@ export const TapeStrips = () => (
     <div className="tape tape-a"><div className="tape-track"><Row /><Row /></div></div>
     <div className="tape tape-b"><div className="tape-track"><Row /><Row /></div></div>
   </div>
+);
+
+// Vendors he has delivered with. Visible strip, separate from the tools.
+export const VendorStrip = () => (
+  <section className="vendor-strip" aria-label="Vendors I have worked with">
+    <p className="vendor-label">Worked with</p>
+    <ul className="vendor-list">
+      <li className="vendor-pill vendor-twilio"><strong>Twilio</strong><span>SMS and WhatsApp</span></li>
+      <li className="vendor-pill vendor-sinch"><strong>SINCH</strong><span>SMS and WhatsApp</span></li>
+    </ul>
+  </section>
 );
