@@ -380,9 +380,13 @@ export default function LockScreen() {
         <svg className="lock-pad" viewBox="0 0 10 13"><rect x="1" y="5.5" width="8" height="7" rx="1.5" fill="currentColor" /><path d="M2.8 5.5V3.8a2.2 2.2 0 0 1 4.4 0v1.7" fill="none" stroke="currentColor" strokeWidth="1.3" /></svg>
         <span className="lock-battwrap"><b>100%</b><span className="lock-batt"><i /></span></span>
       </div>
+      <div className="lock-sp" />
       <div className="lock-clock">
         <div className="lock-time">{clock.time}</div>
         <div className="lock-date">{clock.date}</div>
+
+      </div>
+      <div className="lock-zone">
         <div className="lock-welcome-row">
           <img className="lock-dp" src="/assets/vishal-das.jpg" alt="" width="40" height="40" decoding="async" />
           <p className="lock-welcome">Hey, welcome! Brewed with strategy and caffeine.</p>
@@ -393,6 +397,7 @@ export default function LockScreen() {
         <EarthCanvas />
         <div className="globe-shade" />
       </div>
+      <div className="lock-sp" />
       <div className="lock-bottom">
         <div className="lock-trackwrap">
         <div className="lock-track" ref={track}>
