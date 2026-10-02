@@ -10,9 +10,13 @@ import SkillsTimeline from './components/SkillsTimeline';
 import Contact from './components/Contact';
 import Playground from './components/Playground';
 import useEnhancements from './components/useEnhancements';
+import useBold from './components/useBold';
+import { TapeStrips } from './components/Stickers';
+import './components/bold.css';
 
 function App() {
   useEnhancements();
+  useBold();
   useEffect(() => {
     // Select elements after render
     const cards = document.querySelectorAll(".tilt-card");
@@ -90,6 +94,7 @@ function App() {
       <Navbar />
       <main>
         <Hero />
+        <TapeStrips />
         <About />
         <Projects />
         <AIVentures />
