@@ -194,6 +194,13 @@ function Banner() {
 export default function LockScreen() {
   const [locked, setLocked] = useState(() => typeof window !== 'undefined' && shouldLock());
   const [leaving, setLeaving] = useState(false);
+  useEffect(() => {
+    if (!locked || document.getElementById('lock-font')) return;
+    const l = document.createElement('link');
+    l.id = 'lock-font'; l.rel = 'stylesheet';
+    l.href = 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap&text=House%20blend%3A%20strategy%2C%20delivery%2C%20caffeine.';
+    document.head.appendChild(l);
+  }, [locked]);
   const [lit, setLit] = useState(false);
   const [flash, setFlash] = useState(false);
   const [clock, setClock] = useState(clockText);
@@ -346,7 +353,7 @@ export default function LockScreen() {
         <div className="lock-date">{clock.date}</div>
         <div className="lock-welcome-row">
           <img className="lock-dp" src="/assets/vishal-das.jpg" alt="" width="40" height="40" decoding="async" />
-          <p className="lock-welcome">Hi, I&apos;m Vishal. Come on in.</p>
+          <p className="lock-welcome">House blend: strategy, delivery, caffeine.</p>
         </div>
       </div>
       <div className="lock-globe" aria-hidden="true">
