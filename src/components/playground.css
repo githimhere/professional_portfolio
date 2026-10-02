@@ -130,3 +130,19 @@
   .play-stage { height: 430px; }
   .play-stage .play-chip { font-size: 0.76rem; padding: 0.4rem 0.7rem; min-height: 2rem; }
 }
+
+/* Hero: ring chips for desktop, separate chip strip for phones. */
+.skill-halo.skill-halo--strip { display: none; }
+
+/* Play puck: left of the portrait card, just touching it (desktop); on the photo's lower-right corner on phones. */
+.sticker-layer .sticker-play { left: auto; right: calc(50% + 161px); bottom: 1%; }
+@media (max-width: 880px) {
+  .hero-visual { margin-bottom: -2.5rem; }
+  .skill-halo.skill-halo--ring { display: none; }
+  .skill-halo.skill-halo--strip { display: flex; }
+  .sticker-layer .sticker-play {
+    bottom: auto; width: 4.8rem;
+    top: calc(1rem + (min(82vw, 330px) - 2rem) * 1.24 - 2.6rem);
+    right: calc((100% - min(82vw, 330px)) / 2 + 0.25rem);
+  }
+}
