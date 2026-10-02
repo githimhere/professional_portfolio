@@ -12,9 +12,20 @@ const CanvasBackground = () => {
     let particles = [];
     let pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
     let animationFrameId;
+    // Touch phones: render at 1x, about 30 frames a second, and rest while the page is scrolling,
+    // so the starfield never competes with scrolling for the frame budget.
+    const touch = window.matchMedia && window.matchMedia('(hover: none), (pointer: coarse)').matches;
+    let lastFrame = 0;
+    let scrolling = false;
+    let scrollTimer = 0;
+    const onScrollRest = () => {
+      scrolling = true;
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => { scrolling = false; }, 160);
+    };
 
     const resizeCanvas = () => {
-      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      const ratio = touch ? 1 : Math.min(window.devicePixelRatio || 1, 2);
       canvas.width = window.innerWidth * ratio;
       canvas.height = window.innerHeight * ratio;
       canvas.style.width = `${window.innerWidth}px`;
@@ -31,7 +42,13 @@ const CanvasBackground = () => {
       }));
     };
 
-    const drawParticles = () => {
+    const drawParticles = (now) => {
+      const paused = document.hidden || document.documentElement.classList.contains('lock-on') || (touch && scrolling);
+      if (paused || (touch && now - lastFrame < 33)) {
+        animationFrameId = requestAnimationFrame(drawParticles);
+        return;
+      }
+      lastFrame = now;
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
       particles.forEach((particle, index) => {
@@ -78,13 +95,16 @@ const CanvasBackground = () => {
       }
     };
 
+    if (touch) window.addEventListener('scroll', onScrollRest, { passive: true });
     window.addEventListener('pointermove', setPointer);
     window.addEventListener('resize', resizeCanvas);
     
     resizeCanvas();
-    drawParticles();
+    animationFrameId = requestAnimationFrame(drawParticles);
 
     return () => {
+      window.removeEventListener('scroll', onScrollRest);
+      clearTimeout(scrollTimer);
       window.removeEventListener('pointermove', setPointer);
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationFrameId);

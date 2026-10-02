@@ -8,8 +8,16 @@ import Projects from './components/Projects';
 import AIVentures from './components/AIVentures';
 import SkillsTimeline from './components/SkillsTimeline';
 import Contact from './components/Contact';
+import Playground from './components/Playground';
+import useEnhancements from './components/useEnhancements';
+import useBold from './components/useBold';
+import { TapeStrips, VendorStrip } from './components/Stickers';
+import './components/bold.css';
+import LockScreen from './components/LockScreen';
 
 function App() {
+  useEnhancements();
+  useBold();
   useEffect(() => {
     // Select elements after render
     const cards = document.querySelectorAll(".tilt-card");
@@ -83,14 +91,18 @@ function App() {
 
   return (
     <>
+      <LockScreen />
       <CanvasBackground />
       <Navbar />
       <main>
         <Hero />
+        <TapeStrips />
+        <VendorStrip />
         <About />
         <Projects />
         <AIVentures />
         <SkillsTimeline />
+        <Playground />
         <Contact />
       </main>
       <Analytics />
