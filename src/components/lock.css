@@ -25,7 +25,7 @@ html.lock-on, html.lock-on body { overflow: hidden; }
 .lock-clock { position: relative; z-index: 1; text-align: center; margin-top: clamp(0.5rem, 3vmin, 2rem); text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5); }
 .lock-time { font-size: clamp(4.2rem, 17vmin, 11rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; }
 .lock-date { margin-top: 0.3rem; font-size: clamp(1rem, 3.2vmin, 1.8rem); font-weight: 500; opacity: 0.92; }
-.lock-welcome { margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(1.2rem, 3.8vmin, 2.2rem); font-weight: 500; letter-spacing: -0.01em; color: #cfe4ff; text-shadow: 0 0 18px rgba(100, 170, 255, 0.55); }
+.lock-welcome { margin: 0; font-family: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive; font-size: clamp(1.7rem, 5.4vmin, 3rem); font-weight: 700; letter-spacing: 0.01em; line-height: 1.05; text-align: left; max-width: 11.5em; text-wrap: balance; color: #cfe4ff; text-shadow: 0 0 18px rgba(100, 170, 255, 0.55); }
 .lock-globe {
   position: relative; z-index: 1; flex: 0 0 auto; width: clamp(12rem, 52vmin, 30rem); aspect-ratio: 1; border-radius: 50%; overflow: hidden;
   background: radial-gradient(circle at 36% 30%, #4a9bf5 0%, #1c5fc4 38%, #0b2f73 68%, #041636 100%);
