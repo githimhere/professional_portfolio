@@ -218,3 +218,18 @@ html, body { overflow-x: clip; max-width: 100%; }
 main { overflow-x: clip; }
 .tape-wrap { overflow: hidden; contain: paint; width: 100%; }
 .doodle { left: min(var(--x), calc(100% - 3.2rem)); }
+
+/* ---------- "grab me" affordance: chips tremble in bursts, hand drags back and forth ---------- */
+.play-teasers .play-chip { animation: chip-bob 3.4s ease-in-out var(--d) infinite, chip-jiggle 2.6s ease-in-out var(--d) infinite; cursor: grab; }
+@keyframes chip-jiggle {
+  0%, 55%, 100% { rotate: var(--r); }
+  60% { rotate: calc(var(--r) - 7deg); }
+  66% { rotate: calc(var(--r) + 7deg); }
+  72% { rotate: calc(var(--r) - 6deg); }
+  78% { rotate: calc(var(--r) + 5deg); }
+  84% { rotate: calc(var(--r) - 3deg); }
+  90% { rotate: var(--r); }
+}
+.play-hint .hint-hand { display: inline-block; animation: hand-drag 1.8s ease-in-out infinite; transform-origin: 60% 90%; }
+@keyframes hand-drag { 0%, 100% { translate: -6px 0; rotate: -12deg; } 50% { translate: 8px -3px; rotate: 14deg; } }
+@media (prefers-reduced-motion: reduce) { .play-hint .hint-hand { animation: none !important; } }
