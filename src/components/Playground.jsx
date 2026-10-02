@@ -10,7 +10,7 @@ const TEASERS = [
   { n: 'Marketo', x: '2%', y: '2%', r: '-8deg', d: '0s', c: '#55f0c2' },
   { n: 'GenAI', x: '55%', y: '0%', r: '7deg', d: '0.5s', c: '#ff6b9a' },
   { n: 'ZMP', x: '30%', y: '32%', r: '4deg', d: '1s', c: '#ffd166' },
-  { n: 'Twilio', x: '66%', y: '36%', r: '-6deg', d: '1.5s', c: '#60a5fa' },
+  { n: 'Acoustic', x: '66%', y: '36%', r: '-6deg', d: '1.5s', c: '#60a5fa' },
   { n: 'SAP Hybris', x: '0%', y: '64%', r: '6deg', d: '0.8s', c: '#ffd166' },
   { n: 'Agent Chatbot', x: '38%', y: '70%', r: '-5deg', d: '1.2s', c: '#55f0c2' },
 ];
