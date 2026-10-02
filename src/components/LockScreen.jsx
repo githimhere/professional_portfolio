@@ -176,13 +176,38 @@ function Welcomer() {
 // Fake iOS notification banner: slides down, then tucks away on its own.
 function Banner() {
   const [on, setOn] = useState(false);
+  const el = useRef(null);
+  const drag = useRef(null);
   useEffect(() => {
     const a = setTimeout(() => setOn(true), 1500);
-    const b = setTimeout(() => setOn(false), 6500);
+    const b = setTimeout(() => setOn(false), 7000);
     return () => { clearTimeout(a); clearTimeout(b); };
   }, []);
+  const down = (e) => { drag.current = { y: e.clientY, dy: 0 }; try { e.currentTarget.setPointerCapture(e.pointerId); } catch (err) { /* ignore */ } if (el.current) el.current.style.transition = 'none'; };
+  const move = (e) => {
+    const d = drag.current; if (!d || !el.current) return;
+    d.dy = Math.min(8, e.clientY - d.y);
+    el.current.style.transform = `translate3d(-50%, ${d.dy}px, 0)`;
+    el.current.style.opacity = String(Math.max(0.2, 1 + d.dy / 160));
+  };
+  const up = () => {
+    const d = drag.current; drag.current = null;
+    if (!el.current) return;
+    el.current.style.transition = ''; el.current.style.transform = ''; el.current.style.opacity = '';
+    if (!d || d.dy < -24 || Math.abs(d.dy) < 6) setOn(false);
+  };
   return (
-    <button type="button" className={`lock-banner${on ? ' is-on' : ''}`} onClick={() => setOn(false)} aria-hidden={!on} tabIndex={on ? 0 : -1}>
+    <button
+      type="button"
+      ref={el}
+      className={`lock-banner${on ? ' is-on' : ''}`}
+      onPointerDown={down}
+      onPointerMove={move}
+      onPointerUp={up}
+      onPointerCancel={up}
+      aria-hidden={!on}
+      tabIndex={on ? 0 : -1}
+    >
       <span className="lb-icon">VD</span>
       <span className="lb-text"><b>Vishal</b><i>Thanks for stopping by.</i></span>
       <span className="lb-now">now</span>
@@ -198,7 +223,7 @@ export default function LockScreen() {
     if (!locked || document.getElementById('lock-font')) return;
     const l = document.createElement('link');
     l.id = 'lock-font'; l.rel = 'stylesheet';
-    l.href = 'https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap&text=House%20blend%3A%20strategy%2C%20delivery%2C%20caffeine.';
+    l.href = 'https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap';
     document.head.appendChild(l);
   }, [locked]);
   const [lit, setLit] = useState(false);
@@ -346,7 +371,7 @@ export default function LockScreen() {
       <div className="lock-status" aria-hidden="true">
         <span>Vishal Das</span>
         <svg className="lock-pad" viewBox="0 0 10 13"><rect x="1" y="5.5" width="8" height="7" rx="1.5" fill="currentColor" /><path d="M2.8 5.5V3.8a2.2 2.2 0 0 1 4.4 0v1.7" fill="none" stroke="currentColor" strokeWidth="1.3" /></svg>
-        <span className="lock-batt"><i /></span>
+        <span className="lock-battwrap"><b>100%</b><span className="lock-batt"><i /></span></span>
       </div>
       <div className="lock-clock">
         <div className="lock-time">{clock.time}</div>
