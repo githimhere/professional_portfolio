@@ -25,7 +25,7 @@ html.lock-on, html.lock-on body { overflow: hidden; }
 .lock-clock { position: relative; z-index: 1; text-align: center; margin-top: clamp(0.5rem, 3vmin, 2rem); text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5); }
 .lock-time { font-size: clamp(4.2rem, 17vmin, 11rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; }
 .lock-date { margin-top: 0.3rem; font-size: clamp(1rem, 3.2vmin, 1.8rem); font-weight: 500; opacity: 0.92; }
-.lock-welcome { margin: 0; font-family: 'Caveat', 'Segoe Print', 'Bradley Hand', cursive; font-size: clamp(1.7rem, 5.4vmin, 3rem); font-weight: 700; letter-spacing: 0.01em; line-height: 1.05; text-align: left; max-width: 11.5em; text-wrap: balance; color: #cfe4ff; text-shadow: 0 0 18px rgba(100, 170, 255, 0.55); }
+.lock-welcome { margin: 0; font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', system-ui, sans-serif; font-size: clamp(1.15rem, 3.8vmin, 2rem); font-weight: 600; letter-spacing: 0.01em; line-height: 1.2; text-align: center; max-width: 13em; text-wrap: balance; color: #cfe4ff; text-shadow: 0 0 18px rgba(100, 170, 255, 0.55); }
 .lock-globe {
   position: relative; z-index: 1; flex: 0 0 auto; width: clamp(12rem, 52vmin, 30rem); aspect-ratio: 1; border-radius: 50%; overflow: hidden;
   background: radial-gradient(circle at 36% 30%, #4a9bf5 0%, #1c5fc4 38%, #0b2f73 68%, #041636 100%);
@@ -85,7 +85,7 @@ html.lock-on, html.lock-on body { overflow: hidden; }
 @keyframes lock-fade { to { opacity: 0; } }
 
 /* banner, corner buttons, flashlight */
-.lock-banner { position: absolute; top: calc(max(1rem, env(safe-area-inset-top)) + 2.6rem); left: 50%; width: min(92vw, 24rem); z-index: 6; display: flex; align-items: center; gap: 0.7rem; padding: 0.65rem 0.8rem; border: 0; border-radius: 1.2rem; text-align: left; color: #fff; font: inherit; cursor: pointer; background: rgba(36, 44, 66, 0.92); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.12); transform: translate3d(-50%, -160%, 0); opacity: 0; transition: transform 0.55s cubic-bezier(0.2, 0.9, 0.3, 1), opacity 0.35s ease; will-change: transform; }
+.lock-banner { touch-action: none; position: absolute; top: calc(max(1rem, env(safe-area-inset-top)) + 2.6rem); left: 50%; width: min(92vw, 24rem); z-index: 6; display: flex; align-items: center; gap: 0.7rem; padding: 0.65rem 0.8rem; border: 0; border-radius: 1.2rem; text-align: left; color: #fff; font: inherit; cursor: pointer; background: rgba(36, 44, 66, 0.92); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.12); transform: translate3d(-50%, -160%, 0); opacity: 0; transition: transform 0.55s cubic-bezier(0.2, 0.9, 0.3, 1), opacity 0.35s ease; will-change: transform; }
 .lock-banner.is-on { transform: translate3d(-50%, 0, 0); opacity: 1; }
 .lb-icon { flex: 0 0 auto; display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border-radius: 0.6rem; background: linear-gradient(135deg, #55f0c2, #ffd166); color: #0a1426; font-weight: 800; font-size: 0.9rem; }
 .lb-text { flex: 1; display: grid; gap: 0.1rem; min-width: 0; }
@@ -125,3 +125,7 @@ html.lock-on, html.lock-on body { overflow: hidden; }
 @keyframes dp-pop { from { opacity: 0; transform: scale(0.2) rotate(-12deg); } to { opacity: 1; transform: none; } }
 @keyframes wel-in { from { opacity: 0; transform: translateX(-14px); background-position: 100% 0; } to { opacity: 1; transform: none; background-position: 0% 0; } }
 @media (prefers-reduced-motion: reduce) { .lock-dp, .lock-welcome { animation: none; } }
+
+.lock-battwrap { display: inline-flex; align-items: center; gap: 0.35rem; }
+.lock-battwrap b { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.01em; }
+.lock-welcome-row { text-align: center; padding: 0 1rem; }
