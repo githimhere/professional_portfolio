@@ -13,6 +13,7 @@ import useEnhancements from './components/useEnhancements';
 import useBold from './components/useBold';
 import { TapeStrips, VendorStrip } from './components/Stickers';
 import './components/bold.css';
+import LockScreen from './components/LockScreen';
 
 function App() {
   useEnhancements();
@@ -90,6 +91,7 @@ function App() {
 
   return (
     <>
+      <LockScreen />
       <CanvasBackground />
       <Navbar />
       <main>
