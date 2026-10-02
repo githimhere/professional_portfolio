@@ -23,7 +23,7 @@ html.lock-on, html.lock-on body { overflow: hidden; }
 .lock-batt { width: 1.7em; height: 0.8em; border: 1.5px solid #fff; border-radius: 0.2em; padding: 1px; }
 .lock-batt i { display: block; width: 100%; height: 100%; background: #fff; border-radius: 0.08em; }
 .lock-clock { position: relative; z-index: 1; text-align: center; margin-top: clamp(0.5rem, 3vmin, 2rem); text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5); }
-.lock-time { font-size: clamp(4.2rem, 17vmin, 11rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; }
+.lock-time { font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', Inter, system-ui, sans-serif; font-size: clamp(4.4rem, 18vmin, 11.5rem); font-weight: 200; letter-spacing: -0.035em; line-height: 1; font-variant-numeric: tabular-nums; text-shadow: 0 2px 24px rgba(120, 170, 255, 0.25); }
 .lock-date { margin-top: 0.3rem; font-size: clamp(1rem, 3.2vmin, 1.8rem); font-weight: 500; opacity: 0.92; }
 .lock-welcome { margin: 0; font-family: 'Fredoka', 'Nunito', 'Trebuchet MS', system-ui, sans-serif; font-size: clamp(1.15rem, 3.8vmin, 2rem); font-weight: 600; letter-spacing: 0.01em; line-height: 1.2; text-align: center; max-width: 12.6em; text-wrap: balance; color: #cfe4ff; text-shadow: 0 0 18px rgba(100, 170, 255, 0.55); }
 .lock-globe {
@@ -129,3 +129,7 @@ html.lock-on, html.lock-on body { overflow: hidden; }
 @keyframes steam-up { 0% { opacity: 0; transform: translateY(5px) scaleY(0.8); } 30% { opacity: 0.55; } 100% { opacity: 0; transform: translateY(-7px) scaleY(1.1); } }
 @media (prefers-reduced-motion: reduce) { .cup { animation: none; opacity: 1; } .st { animation: none; opacity: 0.4; } }
 .lock-welcome-row { width: fit-content; max-width: 100%; margin-left: auto; margin-right: auto; } .lock-welcome-row .lock-welcome { flex: 0 1 auto; }
+
+.lock-welcome { font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', Inter, system-ui, sans-serif; font-weight: 500; font-size: clamp(1rem, 3.3vmin, 1.7rem); letter-spacing: 0; line-height: 1.25; color: rgba(232, 238, 250, 0.92); background: none; -webkit-background-clip: border-box; background-clip: border-box; -webkit-text-fill-color: currentColor; text-shadow: none; filter: none; }
+.lock-dp { object-position: 50% 52%; }
+.lock-welcome { max-width: 15.5em; text-wrap: balance; }
