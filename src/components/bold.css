@@ -1,0 +1,214 @@
+/* ===== Bold motion layer. Adds only; theme colors, fonts and content unchanged. ===== */
+:root { --spring: cubic-bezier(0.34, 1.56, 0.64, 1); --spring-soft: cubic-bezier(0.34, 1.3, 0.64, 1); }
+
+/* ---------- hero CTAs: same size, aligned, bouncy ---------- */
+.hero-actions { align-items: stretch; gap: 0.9rem; }
+.hero-actions .primary-button,
+.hero-actions .secondary-button {
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  min-height: 3.5rem;
+  min-width: 10.5rem;
+  padding: 0 1.7rem;
+  border: 2px solid transparent;
+  background-origin: border-box;
+  font-size: 1rem;
+  line-height: 1;
+  transition: transform 240ms ease, scale 420ms var(--spring), rotate 420ms var(--spring), box-shadow 300ms ease, background 300ms ease, border-color 300ms ease;
+}
+.hero-actions .secondary-button { border-color: rgba(255, 255, 255, 0.28); }
+.hero-actions .primary-button:hover { scale: 1.09; rotate: -2.5deg; box-shadow: 0 18px 60px rgba(85, 240, 194, 0.5), 0 0 0 5px rgba(85, 240, 194, 0.16); }
+.hero-actions .secondary-button:hover { scale: 1.09; rotate: 2.5deg; background: rgba(255, 209, 102, 0.16); border-color: var(--sun); transform: none; }
+.hero-actions .primary-button:active, .hero-actions .secondary-button:active { scale: 0.92; rotate: 0deg; transition-duration: 90ms; }
+.hero-actions .primary-button::after {
+  content: '';
+  position: absolute;
+  inset: -20% auto -20% -60%;
+  width: 40%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.65), transparent);
+  transform: skewX(-18deg);
+  animation: btn-shine 3.6s ease-in-out 1.6s infinite;
+}
+@keyframes btn-shine { 0% { left: -60%; } 28%, 100% { left: 130%; } }
+
+/* ---------- entrance, only when the bold layer is on ---------- */
+.bold-on .hero .eyebrow { animation: slide-in 700ms var(--spring-soft) 80ms backwards; }
+.bold-on .hero h1 .w { display: inline-block; animation: word-pop 850ms var(--spring) backwards; animation-delay: calc(var(--i) * 55ms + 60ms); }
+.bold-on .hero-text { animation: rise 800ms var(--spring-soft) 450ms backwards; }
+.bold-on .hero-actions .primary-button { animation: pop-in 700ms var(--spring) 650ms backwards; }
+.bold-on .hero-actions .secondary-button { animation: pop-in 700ms var(--spring) 780ms backwards; }
+.bold-on .profile-card { animation: card-drop 1100ms var(--spring) 300ms backwards; }
+.bold-on .sticker-burst { animation: sticker-in 800ms var(--spring) 900ms backwards, wobble 4s ease-in-out 1.8s infinite; }
+.bold-on .sticker-play { animation: sticker-in 800ms var(--spring) 1050ms backwards; }
+@keyframes word-pop { 0% { opacity: 0; translate: 0 0.7em; scale: 0.6; rotate: 7deg; } 100% { opacity: 1; translate: 0 0; scale: 1; rotate: 0deg; } }
+@keyframes slide-in { 0% { opacity: 0; translate: -40px 0; } 100% { opacity: 1; translate: 0 0; } }
+@keyframes rise { 0% { opacity: 0; translate: 0 30px; } 100% { opacity: 1; translate: 0 0; } }
+@keyframes pop-in { 0% { opacity: 0; scale: 0.3; rotate: -12deg; } 100% { opacity: 1; scale: 1; rotate: 0deg; } }
+@keyframes card-drop { 0% { opacity: 0; translate: 0 -90px; scale: 0.85; rotate: 5deg; } 100% { opacity: 1; translate: 0 0; scale: 1; rotate: 0deg; } }
+@keyframes sticker-in { 0% { opacity: 0; scale: 0; rotate: -60deg; } 100% { opacity: 1; scale: 1; rotate: 0deg; } }
+@keyframes wobble { 0%, 100% { rotate: 10deg; } 50% { rotate: 16deg; } }
+
+/* ---------- marker highlights on headline words ---------- */
+.hl { position: relative; z-index: 0; }
+.hl::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 52% -0.12em 4% -0.12em;
+  border-radius: 0.3em;
+  background: rgba(85, 240, 194, 0.5);
+  transform: scaleX(0) rotate(-1.5deg);
+  transform-origin: left center;
+  transition: transform 700ms var(--spring-soft) 700ms;
+}
+.hl.hl-sun::before { background: rgba(255, 209, 102, 0.42); }
+.hl.hl-rose::before { background: rgba(255, 107, 154, 0.42); }
+.bold-on .hero h1 .hl::before { transform: scaleX(1) rotate(-1.5deg); transition-delay: 1s; }
+.bold-on h2.in .hl::before { transform: scaleX(1) rotate(-1.5deg); }
+.bold-on h2[data-split] .w { display: inline-block; opacity: 0; translate: 0 0.6em; scale: 0.7; rotate: 6deg; }
+.bold-on h2[data-split].in .w {
+  opacity: 1; translate: 0 0; scale: 1; rotate: 0deg;
+  transition: opacity 400ms ease, translate 800ms var(--spring), scale 800ms var(--spring), rotate 800ms var(--spring);
+  transition-delay: calc(var(--i) * 60ms);
+}
+
+/* ---------- bigger, bouncier scroll reveals ---------- */
+html.bold-on .reveal { opacity: 0; transform: translateY(54px) scale(0.93) rotate(-1deg); transition: opacity 500ms ease, transform 900ms var(--spring); }
+html.bold-on .reveal.visible { opacity: 1; transform: none; }
+
+/* ---------- spring hovers ---------- */
+.project-card, .lab-card, .proof-grid article, .timeline-item, .metric-strip > *, .contact-links a, .quick-tags span, .floating-chip, .nav-links a, .resume-link {
+  transition-property: transform, scale, rotate, background, border-color, box-shadow, color, opacity;
+  transition-duration: 300ms, 450ms, 450ms, 300ms, 300ms, 300ms, 300ms, 300ms;
+  transition-timing-function: ease, var(--spring), var(--spring), ease, ease, ease, ease, ease;
+}
+.project-card:hover { scale: 1.04; rotate: -1deg; box-shadow: 0 30px 80px rgba(85, 240, 194, 0.18); border-color: rgba(85, 240, 194, 0.5); }
+.project-card:nth-child(even):hover { rotate: 1deg; }
+.lab-card:hover, .proof-grid article:hover { scale: 1.04; rotate: 0.8deg; border-color: rgba(255, 209, 102, 0.55); }
+.timeline-item:hover { scale: 1.025; translate: 8px 0; border-color: rgba(85, 240, 194, 0.5); }
+.metric-strip > *:hover { scale: 1.08; rotate: -2deg; }
+.quick-tags span:hover, .project-card .tags span:hover { scale: 1.2; rotate: -6deg; background: rgba(255, 209, 102, 0.22); }
+.nav-links a:hover { scale: 1.12; rotate: -2deg; }
+.resume-link:hover { scale: 1.1; rotate: 2deg; }
+.floating-chip:hover { scale: 1.2; rotate: 6deg; }
+.profile-card { transition-property: transform, scale, rotate; }
+.nav-links a[href="#play"]::after {
+  content: '';
+  display: inline-block;
+  width: 0.45rem; height: 0.45rem;
+  margin-left: 0.4rem;
+  border-radius: 50%;
+  background: var(--rose);
+  vertical-align: middle;
+  animation: ping 1.6s ease-out infinite;
+}
+@keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(255, 107, 154, 0.8); } 80%, 100% { box-shadow: 0 0 0 0.6rem rgba(255, 107, 154, 0); } }
+
+/* ---------- hero stickers ---------- */
+.sticker-layer { position: absolute; inset: 0; pointer-events: none; z-index: 6; }
+.sticker { position: absolute; display: grid; place-items: center; pointer-events: auto; }
+.sticker-burst {
+  top: 3%; right: 1%;
+  width: clamp(5.6rem, 11vw, 7.6rem); aspect-ratio: 1;
+  color: var(--sun); rotate: 12deg;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.5));
+}
+.sticker-burst .burst-shape { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 18s linear infinite; }
+.sticker-burst span {
+  position: relative; color: #101114; text-align: center; font-family: 'Space Grotesk', Inter, sans-serif;
+  font-weight: 800; font-size: clamp(0.95rem, 1.7vw, 1.2rem); line-height: 1; transform: rotate(-8deg);
+}
+.sticker-play {
+  left: -5%; bottom: 1%;
+  width: clamp(6rem, 11vw, 7.8rem); aspect-ratio: 1; border-radius: 50%;
+  background: var(--rose); color: #101114; text-decoration: none; cursor: pointer;
+  box-shadow: 0 14px 34px rgba(255, 107, 154, 0.4);
+  transition: scale 420ms var(--spring), rotate 420ms var(--spring);
+  animation: float-y 3.2s ease-in-out infinite;
+}
+.sticker-play:hover { scale: 1.16; rotate: -10deg; }
+.sticker-play:active { scale: 0.9; }
+.sticker-play .play-ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 12s linear infinite; }
+.sticker-play .play-ring text { font: 800 10.5px 'Space Grotesk', Inter, sans-serif; letter-spacing: 0.08em; fill: #101114; }
+.sticker-play:hover .play-ring { animation-duration: 3s; }
+.sticker-play .play-core {
+  display: grid; place-items: center; width: 38%; aspect-ratio: 1; border-radius: 50%;
+  background: #101114; color: var(--rose); font-size: 1rem; padding-left: 0.15rem;
+}
+.spark { position: absolute; width: 1.6rem; height: 1.6rem; animation: twinkle 2.4s ease-in-out infinite; }
+.spark-a { color: var(--mint); top: 10%; left: 6%; }
+.spark-b { color: var(--sun); top: 55%; right: -1%; width: 1.2rem; height: 1.2rem; animation-delay: 0.8s; }
+.spark-c { color: var(--rose); top: 30%; left: -1%; width: 1rem; height: 1rem; animation-delay: 1.5s; }
+@keyframes twinkle { 0%, 100% { scale: 0.5; rotate: 0deg; opacity: 0.6; } 50% { scale: 1.25; rotate: 90deg; opacity: 1; } }
+@keyframes float-y { 0%, 100% { translate: 0 0; } 50% { translate: 0 -12px; } }
+
+/* ---------- crossing tape strips ---------- */
+.tape-wrap { position: relative; height: 8.2rem; margin: 0.5rem 0 1rem; overflow: clip; }
+.tape {
+  position: absolute; left: -5%; width: 110%;
+  overflow: hidden; border-block: 2px solid #101114;
+  font-family: 'Space Grotesk', Inter, sans-serif; font-weight: 800; text-transform: uppercase;
+  color: #101114; box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+}
+.tape-a { top: 0.7rem; background: var(--sun); rotate: -2.2deg; }
+.tape-b { top: 3.9rem; background: var(--mint); rotate: 1.8deg; }
+.tape-track { display: flex; width: max-content; padding: 0.7rem 0; font-size: clamp(1.1rem, 2.4vw, 1.6rem); animation: tape-left 22s linear infinite; }
+.tape-b .tape-track { animation-name: tape-right; animation-duration: 26s; }
+.tape-track span { display: inline-flex; align-items: center; white-space: nowrap; padding: 0 0.9rem; }
+.tape-track i { font-style: normal; margin-left: 1.8rem; display: inline-block; animation: spin 5s linear infinite; }
+.tape:hover .tape-track { animation-play-state: paused; }
+@keyframes tape-left { to { transform: translateX(-50%); } }
+@keyframes tape-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+
+/* ---------- margin doodles ---------- */
+.doodle {
+  position: absolute; left: var(--x); top: var(--y); z-index: -1;
+  font-size: var(--s); line-height: 1; opacity: 0.55; pointer-events: none;
+  animation: doodle-bob 5s ease-in-out var(--d) infinite;
+}
+@keyframes doodle-bob { 0%, 100% { transform: translateY(0) rotate(-12deg); } 50% { transform: translateY(-16px) rotate(18deg); } }
+.burst-particle { position: fixed; z-index: 9999; pointer-events: none; font-size: 1.3rem; line-height: 1; }
+
+/* ---------- bigger playground header ---------- */
+.play-section { position: relative; }
+.play-head { position: relative; max-width: none; }
+.play-head h2 { font-size: clamp(2.8rem, 8vw, 5.6rem); line-height: 0.98; max-width: 10ch; }
+.play-head .eyebrow {
+  justify-self: start; padding: 0.35rem 0.8rem; border-radius: 999px;
+  color: #101114; background: var(--rose); rotate: -3deg; letter-spacing: 0.12em;
+  animation: wobble-s 3s ease-in-out infinite;
+}
+@keyframes wobble-s { 0%, 100% { rotate: -3deg; } 50% { rotate: 3deg; } }
+.play-teasers { position: absolute; right: 0; top: -0.5rem; width: min(40%, 28rem); height: 100%; min-height: 13rem; pointer-events: none; }
+.play-teasers .play-chip {
+  position: absolute; left: var(--x); top: var(--y); rotate: var(--r);
+  font-size: 1rem; padding: 0.7rem 1.2rem; min-height: 0;
+  animation: chip-bob 3.4s ease-in-out var(--d) infinite;
+  border-color: var(--c); box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.04), 6px 6px 0 var(--c);
+}
+@keyframes chip-bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -14px; } }
+.play-hint {
+  position: absolute; left: 4%; bottom: -1.4rem; display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.5rem 0.9rem; border-radius: 1rem 1rem 1rem 0.2rem; background: var(--sun); color: #101114;
+  font: 800 0.95rem 'Space Grotesk', Inter, sans-serif; rotate: -4deg; animation: wobble-s 2.6s ease-in-out infinite;
+}
+@media (max-width: 880px) {
+  .play-teasers { position: relative; width: 100%; height: 12.5rem; min-height: 0; margin-top: 1.2rem; }
+  .play-hint { left: auto; right: 4%; bottom: -0.6rem; }
+  .sticker-layer { inset: 0 0 auto 0; height: 100%; }
+}
+@media (max-width: 560px) {
+  .hero-actions .primary-button, .hero-actions .secondary-button { min-height: 3.5rem; width: 100%; }
+  .tape-wrap { height: 7rem; }
+  .tape-b { top: 3.4rem; }
+  .sticker-play { left: 3%; bottom: -3.4rem; width: 6.2rem; }
+  .sticker-burst { right: 0; top: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tape-track, .tape-track i, .sticker, .sticker *, .spark, .doodle, .play-teasers .play-chip, .play-hint, .play-head .eyebrow,
+  .hero-actions .primary-button::after, .nav-links a[href="#play"]::after { animation: none !important; }
+  .hero-actions a, .project-card, .lab-card, .proof-grid article, .timeline-item, .metric-strip > *, .floating-chip { transition: none !important; scale: none !important; rotate: none !important; }
+  .doodle { display: none; }
+  }
