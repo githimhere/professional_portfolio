@@ -163,48 +163,15 @@ function EarthCanvas() {
   );
 }
 
-// A small welcome character: Namaste, a bow, then points down at the slider.
+// Welcome cue: folded hands (namaste) with a bow, then a hand pointing down at the knob.
 function Welcomer() {
   return (
-    <svg className="welcomer" viewBox="0 0 70 100" aria-hidden="true">
-      <g className="w-all">
-        <rect x="22" y="70" width="9" height="26" rx="4" fill="#2a2f45" />
-        <rect x="39" y="70" width="9" height="26" rx="4" fill="#2a2f45" />
-        <ellipse cx="26" cy="97" rx="8" ry="3" fill="#161a2b" />
-        <ellipse cx="44" cy="97" rx="8" ry="3" fill="#161a2b" />
-        <path d="M17 38 Q35 30 53 38 L56 80 Q35 86 14 80 Z" fill="#55f0c2" />
-        <path d="M35 33 V82" stroke="#2fc79c" strokeWidth="1.6" />
-        <g className="w-arms w-idle">
-          <path d="M17 40 Q10 56 14 68" stroke="#55f0c2" strokeWidth="8" strokeLinecap="round" fill="none" />
-          <path d="M53 40 Q60 56 56 68" stroke="#55f0c2" strokeWidth="8" strokeLinecap="round" fill="none" />
-          <circle cx="14" cy="70" r="4.3" fill="#e8b48a" /><circle cx="56" cy="70" r="4.3" fill="#e8b48a" />
-        </g>
-        <g className="w-arms w-nam">
-          <path d="M17 40 Q16 54 33 54" stroke="#55f0c2" strokeWidth="8" strokeLinecap="round" fill="none" />
-          <path d="M53 40 Q54 54 37 54" stroke="#55f0c2" strokeWidth="8" strokeLinecap="round" fill="none" />
-          <rect x="31" y="46" width="8" height="12" rx="4" fill="#e8b48a" />
-        </g>
-        <g className="w-arms w-pt">
-          <path d="M17 40 Q10 56 14 68" stroke="#55f0c2" strokeWidth="8" strokeLinecap="round" fill="none" />
-          <g className="w-finger">
-            <path d="M53 40 Q68 46 64 62" stroke="#55f0c2" strokeWidth="8" strokeLinecap="round" fill="none" />
-            <circle cx="64" cy="65" r="4.5" fill="#e8b48a" />
-            <rect x="62.2" y="66" width="3.6" height="10" rx="1.8" fill="#e8b48a" />
-          </g>
-        </g>
-        <g className="w-head">
-          <rect x="31" y="28" width="8" height="8" fill="#d9a176" />
-          <circle cx="35" cy="19" r="13" fill="#e8b48a" />
-          <path d="M22 18 Q22 4 35 5 Q48 4 48 18 Q43 11 35 11 Q27 11 22 18 Z" fill="#1b1a24" />
-          <circle cx="30" cy="21" r="1.5" fill="#1b1a24" /><circle cx="40" cy="21" r="1.5" fill="#1b1a24" />
-          <path d="M31 26 Q35 29 39 26" stroke="#8a4a3a" strokeWidth="1.5" fill="none" strokeLinecap="round" />
-          <circle cx="35" cy="14" r="1.4" fill="#ff5c8a" />
-        </g>
-      </g>
-    </svg>
+    <div className="welcomer" aria-hidden="true">
+      <span className="w-nam">🙏</span>
+      <span className="w-pt">👇</span>
+    </div>
   );
 }
-
 
 // Fake iOS notification banner: slides down, then tucks away on its own.
 function Banner() {
@@ -377,8 +344,10 @@ export default function LockScreen() {
       <div className="lock-clock">
         <div className="lock-time">{clock.time}</div>
         <div className="lock-date">{clock.date}</div>
-        <img className="lock-dp" src="/assets/vishal-das.jpg" alt="" width="64" height="64" decoding="async" />
-        <p className="lock-welcome">Hi, I&apos;m Vishal. Come on in.</p>
+        <div className="lock-welcome-row">
+          <img className="lock-dp" src="/assets/vishal-das.jpg" alt="" width="40" height="40" decoding="async" />
+          <p className="lock-welcome">Hi, I&apos;m Vishal. Come on in.</p>
+        </div>
       </div>
       <div className="lock-globe" aria-hidden="true">
         <EarthCanvas />
