@@ -202,7 +202,7 @@ html.bold-on .reveal.visible { opacity: 1; transform: none; }
   .hero-actions .primary-button, .hero-actions .secondary-button { min-height: 3.5rem; width: 100%; }
   .tape-wrap { height: 7rem; }
   .tape-b { top: 3.4rem; }
-  .sticker-play { left: 3%; bottom: -3.4rem; width: 6.2rem; }
+  .sticker-play { left: 3%; bottom: -4.6rem; width: 5.6rem; }
   .sticker-burst { right: 0; top: 0; }
 }
 
@@ -211,4 +211,10 @@ html.bold-on .reveal.visible { opacity: 1; transform: none; }
   .hero-actions .primary-button::after, .nav-links a[href="#play"]::after { animation: none !important; }
   .hero-actions a, .project-card, .lab-card, .proof-grid article, .timeline-item, .metric-strip > *, .floating-chip { transition: none !important; scale: none !important; rotate: none !important; }
   .doodle { display: none; }
-  }
+}
+
+/* ---------- no sideways panning on real phones ---------- */
+html, body { overflow-x: clip; max-width: 100%; }
+main { overflow-x: clip; }
+.tape-wrap { overflow: hidden; contain: paint; width: 100%; }
+.doodle { left: min(var(--x), calc(100% - 3.2rem)); }
