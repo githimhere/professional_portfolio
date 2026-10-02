@@ -8,8 +8,11 @@ import Projects from './components/Projects';
 import AIVentures from './components/AIVentures';
 import SkillsTimeline from './components/SkillsTimeline';
 import Contact from './components/Contact';
+import Playground from './components/Playground';
+import useEnhancements from './components/useEnhancements';
 
 function App() {
+  useEnhancements();
   useEffect(() => {
     // Select elements after render
     const cards = document.querySelectorAll(".tilt-card");
@@ -91,6 +94,7 @@ function App() {
         <Projects />
         <AIVentures />
         <SkillsTimeline />
+        <Playground />
         <Contact />
       </main>
       <Analytics />
