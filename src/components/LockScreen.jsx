@@ -205,10 +205,30 @@ function Welcomer() {
   );
 }
 
+
+// Fake iOS notification banner: slides down, then tucks away on its own.
+function Banner() {
+  const [on, setOn] = useState(false);
+  useEffect(() => {
+    const a = setTimeout(() => setOn(true), 1500);
+    const b = setTimeout(() => setOn(false), 6500);
+    return () => { clearTimeout(a); clearTimeout(b); };
+  }, []);
+  return (
+    <button type="button" className={`lock-banner${on ? ' is-on' : ''}`} onClick={() => setOn(false)} aria-hidden={!on} tabIndex={on ? 0 : -1}>
+      <span className="lb-icon">VD</span>
+      <span className="lb-text"><b>Vishal</b><i>Thanks for stopping by.</i></span>
+      <span className="lb-now">now</span>
+    </button>
+  );
+}
+
 // Classic iPhone slide-to-unlock, rebuilt in plain DOM and CSS. Transform and opacity only.
 export default function LockScreen() {
   const [locked, setLocked] = useState(() => typeof window !== 'undefined' && shouldLock());
   const [leaving, setLeaving] = useState(false);
+  const [lit, setLit] = useState(false);
+  const [flash, setFlash] = useState(false);
   const [clock, setClock] = useState(clockText);
   const track = useRef(null);
   const knob = useRef(null);
@@ -266,6 +286,19 @@ export default function LockScreen() {
       root.classList.remove('unlocking');
     }, reduced() ? 300 : 560);
   }, [paint]);
+
+  const openCamera = useCallback(() => {
+    if (state.current.done) return;
+    setFlash(true);
+    measure();
+    setTimeout(() => {
+      finish();
+      setTimeout(() => {
+        const el = document.querySelector('.profile-card');
+        if (el) el.scrollIntoView({ behavior: reduced() ? 'auto' : 'smooth', block: 'center' });
+      }, reduced() ? 400 : 900);
+    }, 160);
+  }, [finish, measure]);
 
   const springBack = useCallback(() => {
     const s = state.current;
@@ -332,8 +365,10 @@ export default function LockScreen() {
   if (!locked) return null;
 
   return (
-    <div className={`lock${leaving ? ' is-leaving' : ''}`} role="dialog" aria-label="Slide to unlock the portfolio">
+    <div className={`lock${leaving ? ' is-leaving' : ''}${lit ? ' is-lit' : ''}`} role="dialog" aria-label="Slide to unlock the portfolio">
       <div className="lock-stars" aria-hidden="true" />
+      <div className="lock-beam" aria-hidden="true" />
+      <Banner />
       <div className="lock-status" aria-hidden="true">
         <span>Vishal Das</span>
         <svg className="lock-pad" viewBox="0 0 10 13"><rect x="1" y="5.5" width="8" height="7" rx="1.5" fill="currentColor" /><path d="M2.8 5.5V3.8a2.2 2.2 0 0 1 4.4 0v1.7" fill="none" stroke="currentColor" strokeWidth="1.3" /></svg>
@@ -375,6 +410,13 @@ export default function LockScreen() {
         </div>
         <button type="button" className="lock-skip" onClick={() => { measure(); finish(); }}>Skip</button>
       </div>
+      <button type="button" className={`lock-corner lc-left${lit ? ' is-on' : ''}`} aria-label="Flashlight" aria-pressed={lit} onClick={() => setLit((v) => !v)}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 2h8v4l-1.6 2.4V21a1 1 0 0 1-1 1h-2.8a1 1 0 0 1-1-1V8.4L8 6V2z" fill="currentColor" /><path d="M10 4.5h4" stroke="#0a1426" strokeWidth="1.4" strokeLinecap="round" /></svg>
+      </button>
+      <button type="button" className="lock-corner lc-right" aria-label="Camera" onClick={openCamera}>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4.5 7.6 6.5H5a2 2 0 0 0-2 2V18a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.5a2 2 0 0 0-2-2h-2.6L15 4.5H9z" fill="currentColor" /><circle cx="12" cy="13" r="3.8" fill="#0a1426" /><circle cx="12" cy="13" r="2.2" fill="none" stroke="currentColor" strokeWidth="1.2" /></svg>
+      </button>
+      {flash ? <div className="lock-flash" aria-hidden="true" /> : null}
     </div>
   );
 }
