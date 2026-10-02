@@ -63,11 +63,11 @@ const Playground = () => {
         <p className="eyebrow">Playground</p>
         <h2>The stack, as toys.</h2>
         <p className="play-lede">Drag, throw and pile up the platforms I work with. On a phone, turn on tilt and move the device.</p>
+        <span className="play-hint"><span className="hint-hand">✋</span> grab a chip &amp; throw it!</span>
         <div className="play-teasers" aria-hidden="true">
           {TEASERS.map((t) => (
             <span key={t.n} className="play-chip" style={{ '--x': t.x, '--y': t.y, '--r': t.r, '--d': t.d, '--c': t.c }}>{t.n}</span>
           ))}
-          <span className="play-hint"><span className="hint-hand">✋</span> grab a chip &amp; throw it!</span>
         </div>
       </div>
       <div className="play-holder" ref={holder}>
