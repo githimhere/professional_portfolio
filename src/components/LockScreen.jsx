@@ -80,7 +80,7 @@ export default function LockScreen() {
     setTimeout(() => {
       setLocked(false);
       root.classList.remove('unlocking');
-    }, reduced() ? 300 : 900);
+    }, reduced() ? 300 : 560);
   }, [paint]);
 
   const springBack = useCallback(() => {
@@ -158,6 +158,7 @@ export default function LockScreen() {
       <div className="lock-clock">
         <div className="lock-time">{clock.time}</div>
         <div className="lock-date">{clock.date}</div>
+        <p className="lock-welcome">Hi, I&apos;m Vishal. Come on in.</p>
       </div>
       <div className="lock-globe" aria-hidden="true">
         <div className="globe-land" />
