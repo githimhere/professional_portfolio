@@ -11,7 +11,7 @@ import Contact from './components/Contact';
 import Playground from './components/Playground';
 import useEnhancements from './components/useEnhancements';
 import useBold from './components/useBold';
-import { TapeStrips } from './components/Stickers';
+import { TapeStrips, VendorStrip } from './components/Stickers';
 import './components/bold.css';
 
 function App() {
@@ -95,6 +95,7 @@ function App() {
       <main>
         <Hero />
         <TapeStrips />
+        <VendorStrip />
         <About />
         <Projects />
         <AIVentures />
