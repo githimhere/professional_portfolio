@@ -29,13 +29,18 @@ const Hero = () => {
             <span>Delivery Manager | Marketing Automation</span>
           </div>
         </div>
-        <div className="skill-halo" aria-label="Core platform strengths">
+        <div className="skill-halo skill-halo--ring" aria-label="Core platform strengths">
           <div className="floating-chip">ZMP</div>
           <div className="floating-chip">Marketo</div>
           <div className="floating-chip">GenAI</div>
           <div className="floating-chip">Agent Chatbot</div>
           <div className="floating-chip">Lead Conversion Expert</div>
           <div className="floating-chip">SAP Hybris</div>
+        </div>
+        <div className="skill-halo skill-halo--strip" aria-label="Core platform strengths">
+          {['Marketo', 'SAP Hybris', 'Acoustic', 'ZMP', 'BlueVenn', 'Meta Business Manager', 'Power BI'].map((c) => (
+            <div className="floating-chip" key={c}>{c}</div>
+          ))}
         </div>
         <HeroStickers />
       </div>
