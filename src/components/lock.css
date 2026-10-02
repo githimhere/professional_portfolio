@@ -32,10 +32,31 @@ html.lock-on, html.lock-on body { overflow: hidden; }
   box-shadow: 0 0 0 1px rgba(150, 200, 255, 0.25), 0 0 clamp(2rem, 9vmin, 6rem) rgba(70, 150, 255, 0.55);
   contain: layout paint;
 }
-.globe-earth { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 0.6s ease; -webkit-mask-image: repeating-linear-gradient(0deg, #000 0 2px, rgba(0,0,0,0.8) 2px 3px); mask-image: repeating-linear-gradient(0deg, #000 0 2px, rgba(0,0,0,0.8) 2px 3px); }
+.globe-box { position: absolute; inset: 0; }
+.globe-earth { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; touch-action: none; cursor: grab; transform-origin: 50% 50%; will-change: transform; transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 0.8, 0.3, 1); -webkit-mask-image: repeating-linear-gradient(0deg, #000 0 2px, rgba(0,0,0,0.8) 2px 3px); mask-image: repeating-linear-gradient(0deg, #000 0 2px, rgba(0,0,0,0.8) 2px 3px); }
+.globe-earth:active { cursor: grabbing; }
 .globe-earth.is-ready { opacity: 1; }
+.globe-place { position: absolute; left: 50%; bottom: 9%; transform: translateX(-50%); padding: 0.3em 0.8em; border-radius: 999px; background: rgba(4, 12, 30, 0.7); border: 1px solid rgba(140, 190, 255, 0.4); color: #e6f1ff; font-size: clamp(0.8rem, 2.4vmin, 1.1rem); white-space: nowrap; pointer-events: none; animation: place-in 0.4s ease both; }
+@keyframes place-in { from { opacity: 0; transform: translate(-50%, 6px); } }
+.lock-dp { display: block; width: clamp(3.4rem, 10vmin, 5.2rem); height: clamp(3.4rem, 10vmin, 5.2rem); margin: clamp(0.6rem, 2vmin, 1.1rem) auto 0; border-radius: 50%; object-fit: cover; object-position: center 22%; border: 2px solid rgba(255, 255, 255, 0.85); box-shadow: 0 0 0 4px rgba(85, 240, 194, 0.25), 0 0 26px rgba(100, 170, 255, 0.5); }
+.lock-trackwrap { position: relative; width: min(92vw, max(20rem, 60vmin)); display: grid; justify-items: center; }
+.lock-trackwrap .lock-track { width: 100%; }
+.welcomer { position: absolute; left: 3%; bottom: calc(100% - 3px); width: clamp(3rem, 9vmin, 4.6rem); height: auto; overflow: visible; pointer-events: none; z-index: 2; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4)); }
+.w-all { animation: w-bob 2.4s ease-in-out infinite; transform-origin: 35px 96px; }
+@keyframes w-bob { 50% { transform: translateY(-1.5px); } }
+.w-arms { opacity: 0; }
+.w-idle { animation: w-idle 8s infinite; }
+.w-nam { animation: w-nam 8s infinite; }
+.w-pt { animation: w-pt 8s infinite; }
+@keyframes w-idle { 0%, 7% { opacity: 1; } 8%, 93% { opacity: 0; } 94%, 100% { opacity: 1; } }
+@keyframes w-nam { 0%, 7% { opacity: 0; } 8%, 40% { opacity: 1; } 41%, 100% { opacity: 0; } }
+@keyframes w-pt { 0%, 40% { opacity: 0; } 41%, 93% { opacity: 1; } 94%, 100% { opacity: 0; } }
+.w-head { animation: w-bow 8s infinite; transform-origin: 35px 34px; }
+@keyframes w-bow { 0%, 13% { transform: rotate(0); } 20%, 28% { transform: rotate(24deg) translateY(2px); } 36%, 100% { transform: rotate(0); } }
+.w-finger { animation: w-point 0.9s ease-in-out infinite; }
+@keyframes w-point { 50% { transform: translateY(3px); } }
 .globe-shade {
-  position: absolute; inset: 0; border-radius: 50%;
+  pointer-events: none; position: absolute; inset: 0; border-radius: 50%;
   background:
     radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.38) 0%, transparent 34%),
     radial-gradient(circle at 50% 50%, transparent 52%, rgba(20, 70, 170, 0.28) 84%, rgba(40, 110, 230, 0.55) 100%);
@@ -70,7 +91,7 @@ html.lock-on, html.lock-on body { overflow: hidden; }
 @keyframes lock-zoom { 0% { transform: scale(1); opacity: 1; } 100% { transform: scale(1.7); opacity: 0; } }
 
 @media (prefers-reduced-motion: reduce) {
-  .lock-label, .lock-stars { animation: none !important; }
+  .lock-label, .lock-stars, .w-all, .w-finger { animation: none !important; }
   .lock-label { background: none; -webkit-text-fill-color: rgba(255, 255, 255, 0.7); color: rgba(255, 255, 255, 0.7); }
   .lock.is-leaving { animation: lock-fade 250ms ease forwards; }
 }
