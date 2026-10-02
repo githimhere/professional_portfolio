@@ -1,4 +1,5 @@
 import React from 'react';
+import { HeroStickers } from './Stickers';
 
 const Hero = () => {
   return (
@@ -36,6 +37,7 @@ const Hero = () => {
           <div className="floating-chip">Lead Conversion Expert</div>
           <div className="floating-chip">SAP Hybris</div>
         </div>
+        <HeroStickers />
       </div>
     </section>
   );
