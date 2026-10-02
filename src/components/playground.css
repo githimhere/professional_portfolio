@@ -124,3 +124,9 @@
 .play-note { color: var(--muted); font-size: 0.85rem; }
 
 .play-section { scroll-margin-top: 5rem; }
+
+
+@media (max-width: 640px) {
+  .play-stage { height: 430px; }
+  .play-stage .play-chip { font-size: 0.76rem; padding: 0.4rem 0.7rem; min-height: 2rem; }
+}
