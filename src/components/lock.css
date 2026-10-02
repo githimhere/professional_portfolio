@@ -25,7 +25,7 @@ html.lock-on, html.lock-on body { overflow: hidden; }
 .lock-clock { position: relative; z-index: 1; text-align: center; margin-top: clamp(0.5rem, 3vmin, 2rem); text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5); }
 .lock-time { font-size: clamp(4.2rem, 17vmin, 11rem); font-weight: 300; letter-spacing: -0.02em; line-height: 1; font-variant-numeric: tabular-nums; }
 .lock-date { margin-top: 0.3rem; font-size: clamp(1rem, 3.2vmin, 1.8rem); font-weight: 500; opacity: 0.92; }
-.lock-welcome { margin: clamp(0.8rem, 2.6vmin, 1.6rem) 0 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(1.2rem, 3.8vmin, 2.2rem); font-weight: 500; letter-spacing: -0.01em; color: #cfe4ff; text-shadow: 0 0 18px rgba(100, 170, 255, 0.55); }
+.lock-welcome { margin: 0; font-family: 'Space Grotesk', Inter, sans-serif; font-size: clamp(1.2rem, 3.8vmin, 2.2rem); font-weight: 500; letter-spacing: -0.01em; color: #cfe4ff; text-shadow: 0 0 18px rgba(100, 170, 255, 0.55); }
 .lock-globe {
   position: relative; z-index: 1; flex: 0 0 auto; width: clamp(12rem, 52vmin, 30rem); aspect-ratio: 1; border-radius: 50%; overflow: hidden;
   background: radial-gradient(circle at 36% 30%, #4a9bf5 0%, #1c5fc4 38%, #0b2f73 68%, #041636 100%);
@@ -38,23 +38,10 @@ html.lock-on, html.lock-on body { overflow: hidden; }
 .globe-earth.is-ready { opacity: 1; }
 .globe-place { position: absolute; left: 50%; bottom: 9%; transform: translateX(-50%); padding: 0.3em 0.8em; border-radius: 999px; background: rgba(4, 12, 30, 0.7); border: 1px solid rgba(140, 190, 255, 0.4); color: #e6f1ff; font-size: clamp(0.8rem, 2.4vmin, 1.1rem); white-space: nowrap; pointer-events: none; animation: place-in 0.4s ease both; }
 @keyframes place-in { from { opacity: 0; transform: translate(-50%, 6px); } }
-.lock-dp { display: block; width: clamp(3.4rem, 10vmin, 5.2rem); height: clamp(3.4rem, 10vmin, 5.2rem); margin: clamp(0.6rem, 2vmin, 1.1rem) auto 0; border-radius: 50%; object-fit: cover; object-position: center 22%; border: 2px solid rgba(255, 255, 255, 0.85); box-shadow: 0 0 0 4px rgba(85, 240, 194, 0.25), 0 0 26px rgba(100, 170, 255, 0.5); }
+.lock-dp { flex: 0 0 auto; display: block; width: clamp(2.2rem, 6.5vmin, 3rem); height: clamp(2.2rem, 6.5vmin, 3rem); border-radius: 50%; object-fit: cover; object-position: center 18%; border: 2px solid rgba(255, 255, 255, 0.85); box-shadow: 0 0 14px rgba(100, 170, 255, 0.5); }
+.lock-welcome-row { display: flex; align-items: center; justify-content: center; gap: 0.6rem; margin-top: clamp(0.8rem, 2.6vmin, 1.6rem); }
 .lock-trackwrap { position: relative; width: min(92vw, max(20rem, 60vmin)); display: grid; justify-items: center; }
 .lock-trackwrap .lock-track { width: 100%; }
-.welcomer { position: absolute; left: 3%; bottom: calc(100% - 3px); width: clamp(3rem, 9vmin, 4.6rem); height: auto; overflow: visible; pointer-events: none; z-index: 2; filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.4)); }
-.w-all { animation: w-bob 2.4s ease-in-out infinite; transform-origin: 35px 96px; }
-@keyframes w-bob { 50% { transform: translateY(-1.5px); } }
-.w-arms { opacity: 0; }
-.w-idle { animation: w-idle 8s infinite; }
-.w-nam { animation: w-nam 8s infinite; }
-.w-pt { animation: w-pt 8s infinite; }
-@keyframes w-idle { 0%, 7% { opacity: 1; } 8%, 93% { opacity: 0; } 94%, 100% { opacity: 1; } }
-@keyframes w-nam { 0%, 7% { opacity: 0; } 8%, 40% { opacity: 1; } 41%, 100% { opacity: 0; } }
-@keyframes w-pt { 0%, 40% { opacity: 0; } 41%, 93% { opacity: 1; } 94%, 100% { opacity: 0; } }
-.w-head { animation: w-bow 8s infinite; transform-origin: 35px 34px; }
-@keyframes w-bow { 0%, 13% { transform: rotate(0); } 20%, 28% { transform: rotate(24deg) translateY(2px); } 36%, 100% { transform: rotate(0); } }
-.w-finger { animation: w-point 0.9s ease-in-out infinite; }
-@keyframes w-point { 50% { transform: translateY(3px); } }
 .globe-shade {
   pointer-events: none; position: absolute; inset: 0; border-radius: 50%;
   background:
@@ -124,3 +111,17 @@ html.lock-on, html.lock-on body { overflow: hidden; }
 .lock-corner:active::after { animation: corner-sheen 0.6s ease-out; }
 @keyframes corner-sheen { 0%, 78% { transform: translate3d(-160%, 0, 0) skewX(-18deg); } 100% { transform: translate3d(330%, 0, 0) skewX(-18deg); } }
 @media (prefers-reduced-motion: reduce) { .lock-corner::after { animation: none; display: none; } }
+
+.welcomer { position: absolute; left: 3%; bottom: calc(100% + 2px); width: clamp(2.6rem, 8vmin, 3.6rem); height: clamp(2.6rem, 8vmin, 3.6rem); pointer-events: none; z-index: 2; font-size: clamp(2rem, 6.4vmin, 2.9rem); line-height: 1; }
+.welcomer span { position: absolute; left: 0; bottom: 0; opacity: 0; transform-origin: 50% 100%; }
+.w-nam { animation: w-nam 6s ease-in-out infinite; }
+.w-pt { animation: w-pt 6s ease-in-out infinite; }
+@keyframes w-nam { 0% { opacity: 0; transform: scale(0.6); } 6%, 14% { opacity: 1; transform: scale(1) rotate(0); } 24%, 36% { opacity: 1; transform: scale(1) rotate(22deg) translateY(2px); } 46% { opacity: 1; transform: scale(1) rotate(0); } 52%, 100% { opacity: 0; transform: scale(0.8); } }
+@keyframes w-pt { 0%, 50% { opacity: 0; transform: translateY(0); } 56% { opacity: 1; transform: translateY(0); } 62% { transform: translateY(7px); } 68% { transform: translateY(0); } 74% { transform: translateY(7px); } 80% { transform: translateY(0); } 86% { transform: translateY(7px); } 92%, 100% { opacity: 0; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .w-nam { animation: none; opacity: 1; } .w-pt { display: none; } }
+/* one-shot entrance: headshot pops, text slides and shines in beside it */
+.lock-dp { animation: dp-pop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) 0.25s both; }
+.lock-welcome { animation: wel-in 0.7s cubic-bezier(0.2, 0.8, 0.3, 1) 0.45s both; background: linear-gradient(100deg, #cfe4ff 0%, #cfe4ff 40%, #ffffff 50%, #cfe4ff 60%, #cfe4ff 100%); background-size: 250% 100%; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; text-shadow: none; filter: drop-shadow(0 0 10px rgba(100, 170, 255, 0.5)); }
+@keyframes dp-pop { from { opacity: 0; transform: scale(0.2) rotate(-12deg); } to { opacity: 1; transform: none; } }
+@keyframes wel-in { from { opacity: 0; transform: translateX(-14px); background-position: 100% 0; } to { opacity: 1; transform: none; background-position: 0% 0; } }
+@media (prefers-reduced-motion: reduce) { .lock-dp, .lock-welcome { animation: none; } }
