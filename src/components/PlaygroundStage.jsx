@@ -179,18 +179,26 @@ const PlaygroundStage = () => {
       el.addEventListener('pointercancel', onUp);
     });
 
-    // Tilt: device orientation steers gravity (portrait only)
+    // Tilt: true 360-degree gravity from device orientation (any direction, any screen rotation).
+    // Gravity in the device frame from beta/gamma: (cos b * sin g, -sin b, -cos b * cos g).
+    // On screen (x right, y down) that is gx = cos b * sin g, gy = sin b; then rotate by screen angle.
     const onOrient = (e) => {
-      const angle = (window.screen.orientation && window.screen.orientation.angle) || 0;
-      if (angle !== 0 || e.gamma == null || e.beta == null) {
-        engine.gravity.x = 0;
-        engine.gravity.y = 1;
-        return;
+      if (e.gamma == null || e.beta == null) return;
+      const b = (e.beta * Math.PI) / 180;
+      const g = (e.gamma * Math.PI) / 180;
+      const mx = Math.cos(b) * Math.sin(g);
+      const my = Math.sin(b);
+      const a = (((window.screen.orientation && window.screen.orientation.angle) || window.orientation || 0) * Math.PI) / 180;
+      let gx = mx * Math.cos(a) + my * Math.sin(a);
+      let gy = -mx * Math.sin(a) + my * Math.cos(a);
+      // lying flat leaves almost no in-plane pull; keep the chips lively
+      const len = Math.hypot(gx, gy);
+      if (len > 0.001 && len < 0.35) {
+        gx = (gx / len) * 0.35;
+        gy = (gy / len) * 0.35;
       }
-      const g = (clamp(e.gamma, -60, 60) * Math.PI) / 180;
-      const bt = (clamp(e.beta, 0, 150) * Math.PI) / 180;
-      engine.gravity.x = clamp(Math.sin(g) * 1.2, -1.2, 1.2);
-      engine.gravity.y = clamp(Math.sin(bt), 0.25, 1);
+      engine.gravity.x = clamp(gx * 1.15, -1.2, 1.2);
+      engine.gravity.y = clamp(gy * 1.15, -1.2, 1.2);
     };
     api.current.enableTilt = () => window.addEventListener('deviceorientation', onOrient);
     api.current.disableTilt = () => {
