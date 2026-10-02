@@ -1,0 +1,127 @@
+/* ===== Added in feat/animation-playground-uat. Adds only; existing rules untouched. ===== */
+
+/* --- sliding active-section pill in the top nav (desktop) --- */
+.nav-links { position: relative; }
+.nav-links > a { position: relative; z-index: 1; }
+.nav-pill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: 999px;
+  background: rgba(85, 240, 194, 0.16);
+  border: 1px solid rgba(85, 240, 194, 0.32);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 450ms cubic-bezier(0.34, 1.3, 0.64, 1), width 450ms cubic-bezier(0.34, 1.3, 0.64, 1), opacity 200ms ease;
+}
+.nav-links a.is-active { color: var(--ink); }
+
+/* --- mobile menu --- */
+.menu-toggle { display: none; }
+@media (max-width: 880px) {
+  .site-header { flex-wrap: wrap; align-items: center; }
+  .menu-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 2.6rem;
+    height: 2.6rem;
+    padding: 0 0.7rem;
+    margin-left: auto;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: transparent;
+    cursor: pointer;
+  }
+  .menu-toggle span {
+    display: block;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--ink);
+    transition: transform 220ms ease, opacity 220ms ease;
+  }
+  .menu-toggle[aria-expanded='true'] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-toggle[aria-expanded='true'] span:nth-child(2) { opacity: 0; }
+  .menu-toggle[aria-expanded='true'] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .resume-link { margin-left: auto; }
+  .resume-link + .menu-toggle { margin-left: 0; }
+  .nav-links.is-open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    order: 5;
+    flex-basis: 100%;
+    gap: 0.2rem;
+    padding: 0.4rem 0.2rem 0.3rem;
+  }
+  .nav-links.is-open a { padding: 0.8rem 1rem; font-size: 1rem; }
+  .nav-links.is-open a.is-active { background: rgba(85, 240, 194, 0.14); }
+  .nav-pill { display: none; }
+}
+
+/* --- cross-fade between section jumps --- */
+::view-transition-old(root),
+::view-transition-new(root) { animation-duration: 260ms; }
+.vt-nav { scroll-behavior: auto; }
+
+/* --- playground --- */
+.play-lede { margin: 0.4rem 0 0; color: var(--muted); max-width: 52ch; }
+.play-holder { position: relative; }
+.play-stage {
+  position: relative;
+  height: clamp(330px, 34vw, 400px);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: rgba(2, 2, 3, 0.38);
+  backdrop-filter: blur(6px);
+}
+.play-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.4rem;
+  padding: 0.55rem 0.95rem;
+  border: 1px solid rgba(85, 240, 194, 0.32);
+  border-radius: 999px;
+  color: var(--ink);
+  background: rgba(2, 2, 3, 0.62);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  font-size: 0.85rem;
+  font-weight: 800;
+  line-height: 1.1;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.play-stage .play-chip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: grab;
+  touch-action: none;
+  will-change: transform;
+  transform: translate3d(-9999px, 0, 0);
+}
+.play-stage .play-chip.is-held { cursor: grabbing; border-color: rgba(85, 240, 194, 0.85); background: rgba(85, 240, 194, 0.2); }
+.play-static { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0; padding: 0; list-style: none; }
+.play-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem; margin-top: 0.8rem; }
+.play-btn {
+  min-height: 2.25rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.06);
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background 220ms ease, border-color 220ms ease;
+}
+.play-btn:hover, .play-btn[aria-pressed='true'] { background: rgba(85, 240, 194, 0.16); border-color: rgba(85, 240, 194, 0.5); }
+.play-note { color: var(--muted); font-size: 0.85rem; }
+
+.play-section { scroll-margin-top: 5rem; }
