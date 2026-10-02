@@ -163,13 +163,20 @@ function EarthCanvas() {
   );
 }
 
-// Welcome cue: folded hands (namaste) with a bow, then a hand pointing down at the knob.
-function Welcomer() {
+// Small coffee cup with gentle steam. SVG paths animated with transform and opacity only.
+function Cup() {
   return (
-    <div className="welcomer" aria-hidden="true">
-      <span className="w-nam">🙏</span>
-      <span className="w-pt">👇</span>
-    </div>
+    <svg className="cup" viewBox="0 0 40 44" aria-hidden="true">
+      <g className="steam" fill="none" stroke="#cfe4ff" strokeWidth="2" strokeLinecap="round">
+        <path className="st st1" d="M13 17 C9 13 17 11 13 6" />
+        <path className="st st2" d="M20 18 C16 13 24 11 20 5" />
+        <path className="st st3" d="M27 17 C23 13 31 11 27 7" />
+      </g>
+      <path d="M6 22h24v7a10 10 0 0 1-10 10h-4A10 10 0 0 1 6 29z" fill="#f3e6d3" />
+      <path d="M30 24h2.5a4.5 4.5 0 0 1 0 9H29" fill="none" stroke="#f3e6d3" strokeWidth="3" strokeLinecap="round" />
+      <ellipse cx="18" cy="22" rx="12" ry="2.2" fill="#6b3f26" />
+      <path d="M4 41h28" stroke="#cfe4ff" strokeOpacity="0.45" strokeWidth="2" strokeLinecap="round" />
+    </svg>
   );
 }
 
@@ -378,7 +385,8 @@ export default function LockScreen() {
         <div className="lock-date">{clock.date}</div>
         <div className="lock-welcome-row">
           <img className="lock-dp" src="/assets/vishal-das.jpg" alt="" width="40" height="40" decoding="async" />
-          <p className="lock-welcome">House blend: strategy, delivery, caffeine.</p>
+          <p className="lock-welcome">Hey, welcome! Brewed with strategy and caffeine.</p>
+          <Cup />
         </div>
       </div>
       <div className="lock-globe" aria-hidden="true">
@@ -387,7 +395,6 @@ export default function LockScreen() {
       </div>
       <div className="lock-bottom">
         <div className="lock-trackwrap">
-        <Welcomer />
         <div className="lock-track" ref={track}>
           <span className="lock-label">slide to unlock</span>
           <div
