@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Matter from 'matter-js';
-import { PLAY_CHIPS, PLAY_CHIPS_MOBILE } from './playChips';
+import { PLAY_CHIPS } from './playChips';
 
 const { Engine, Bodies, Body, Composite, Constraint } = Matter;
 
@@ -14,8 +14,6 @@ const PlaygroundStage = () => {
   const stageRef = useRef(null);
   const chipEls = useRef([]);
   const api = useRef({});
-  // Phones get a smaller pile so the physics box never crowds.
-  const [chips] = useState(() => (typeof window !== 'undefined' && window.innerWidth <= 640 ? PLAY_CHIPS_MOBILE : PLAY_CHIPS));
   const [reduced] = useState(
     () => typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
   );
@@ -273,7 +271,7 @@ const PlaygroundStage = () => {
   if (reduced) {
     return (
       <ul className="play-static" aria-label="Platforms and skills">
-        {chips.map((c) => (
+        {PLAY_CHIPS.map((c) => (
           <li key={c} className="play-chip play-chip--static">{c}</li>
         ))}
       </ul>
@@ -283,7 +281,7 @@ const PlaygroundStage = () => {
   return (
     <div className="play-wrap">
       <div className="play-stage" ref={stageRef} role="group" aria-label="Interactive playground: draggable skill chips (decorative)">
-        {chips.map((c, i) => (
+        {PLAY_CHIPS.map((c, i) => (
           <span
             key={c}
             className="play-chip"
