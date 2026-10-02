@@ -22,19 +22,6 @@ const About = () => {
         </div>
       </section>
 
-      <section className="marquee" aria-label="Portfolio strengths">
-        <div className="marquee-track">
-          <span>Zeta Marketing Platform</span>
-          <span>Marketo</span>
-          <span>SAP Hybris</span>
-          <span>Twilio</span>
-          <span>SINCH</span>
-          <span>Dashboards</span>
-          <span>GenAI Workflows</span>
-          <span>Agile Delivery</span>
-        </div>
-      </section>
-
       <section className="section intro-grid" id="story">
         <div>
           <p className="eyebrow">About</p>
