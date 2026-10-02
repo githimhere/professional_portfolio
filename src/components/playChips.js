@@ -13,6 +13,6 @@ export const PLAY_CHIPS = [
 export const PLAY_CHIPS_MOBILE = [
   'ZMP', 'Marketo', 'SAP Hybris', 'Acoustic', 'BlueVenn', 'GenAI', 'Agent Chatbot', 'Campaign Ops',
   'Leadership', 'Stakeholder Management', 'Sprint Planning', 'Agile/Scrum', 'Jira', 'Burndown Reports',
-  'AI Automation', 'A/B Testing', 'Lifecycle Marketing', 'Power BI', 'Power Automate',
-  'Cross-functional Collaboration',
+  'AI Automation', 'Lifecycle Marketing', 'Power BI',
+  'Meta Business Manager', 'Social Media Manager', 'Meta Certified Marketer',
 ];
