@@ -233,3 +233,23 @@ main { overflow-x: clip; }
 .play-hint .hint-hand { display: inline-block; animation: hand-drag 1.8s ease-in-out infinite; transform-origin: 60% 90%; }
 @keyframes hand-drag { 0%, 100% { translate: -6px 0; rotate: -12deg; } 50% { translate: 8px -3px; rotate: 14deg; } }
 @media (prefers-reduced-motion: reduce) { .play-hint .hint-hand { animation: none !important; } }
+
+/* ---------- "Worked with" vendor strip ---------- */
+.vendor-strip { display: flex; flex-wrap: wrap; align-items: center; gap: 0.9rem 1.4rem; width: min(1160px, calc(100% - 2rem)); margin: 0 auto 1.5rem; }
+.vendor-label {
+  margin: 0; padding: 0.4rem 0.9rem; border-radius: 999px; background: var(--sun); color: #101114;
+  font: 800 0.85rem 'Space Grotesk', Inter, sans-serif; letter-spacing: 0.12em; text-transform: uppercase; rotate: -3deg;
+}
+.vendor-list { display: flex; flex-wrap: wrap; gap: 0.9rem; margin: 0; padding: 0; list-style: none; }
+.vendor-pill {
+  display: inline-flex; flex-direction: column; padding: 0.7rem 1.3rem; border: 2px solid var(--c); border-radius: 1.2rem;
+  background: rgba(255, 255, 255, 0.05); box-shadow: 5px 5px 0 var(--c);
+  transition: scale 420ms var(--spring), rotate 420ms var(--spring);
+  animation: chip-bob 3.6s ease-in-out infinite;
+}
+.vendor-pill strong { font: 800 1.5rem 'Space Grotesk', Inter, sans-serif; line-height: 1.1; }
+.vendor-pill span { color: var(--muted); font-size: 0.8rem; }
+.vendor-twilio { --c: var(--rose); }
+.vendor-sinch { --c: var(--mint); animation-delay: 0.6s; }
+.vendor-pill:hover { scale: 1.1; rotate: -3deg; }
+@media (prefers-reduced-motion: reduce) { .vendor-pill { animation: none !important; transition: none !important; } }
