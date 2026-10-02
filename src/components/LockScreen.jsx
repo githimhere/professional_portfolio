@@ -78,7 +78,7 @@ function EarthCanvas() {
       };
       raf = requestAnimationFrame(loop);
     };
-    img.src = '/earth.jpg';
+    import('./earthData.js').then((m) => { if (!dead) img.src = m.default; });
     return () => { dead = true; cancelAnimationFrame(raf); };
   }, []);
   return <canvas ref={cv} className="globe-earth" width={SIZE} height={SIZE} />;
