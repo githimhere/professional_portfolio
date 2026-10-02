@@ -40,11 +40,12 @@ const PlaygroundStage = () => {
     const buildWalls = () => {
       Composite.remove(world, walls);
       const t = 200;
+      // closed box: floor, ceiling and both sides flush with the visible stage, long enough to overlap at the corners
       walls = [
         Bodies.rectangle(width / 2, height + t / 2, width + t * 2, t, { isStatic: true }),
-        Bodies.rectangle(-t / 2, height / 2 - 650, t, height + 1500, { isStatic: true }),
-        Bodies.rectangle(width + t / 2, height / 2 - 650, t, height + 1500, { isStatic: true }),
-        Bodies.rectangle(width / 2, -1000, width + t * 2, t, { isStatic: true }),
+        Bodies.rectangle(width / 2, -t / 2, width + t * 2, t, { isStatic: true }),
+        Bodies.rectangle(-t / 2, height / 2, t, height + t * 2, { isStatic: true }),
+        Bodies.rectangle(width + t / 2, height / 2, t, height + t * 2, { isStatic: true }),
       ];
       Composite.add(world, walls);
     };
@@ -55,7 +56,7 @@ const PlaygroundStage = () => {
         const w = el.offsetWidth;
         const h = el.offsetHeight;
         const x = clamp(Math.random() * width, w / 2 + 4, width - w / 2 - 4);
-        const y = -40 - i * 30 - Math.random() * 30;
+        const y = clamp(h / 2 + 6 + (i % 8) * 8 + Math.random() * Math.max(10, height * 0.25), h / 2 + 4, height - h / 2 - 4);
         const b = Bodies.rectangle(x, y, w, h, {
           chamfer: { radius: h / 2 },
           restitution: 0.35,
@@ -76,11 +77,30 @@ const PlaygroundStage = () => {
       });
     };
 
+    // Hard containment: a fast throw or a sudden flip can never push a chip out of the visible box.
+    const keepInside = () => {
+      for (let i = 0; i < bodies.length; i += 1) {
+        const b = bodies[i];
+        const bb = b.bounds;
+        let dx = 0;
+        let dy = 0;
+        if (bb.min.x < 0) dx = -bb.min.x;
+        else if (bb.max.x > width) dx = width - bb.max.x;
+        if (bb.min.y < 0) dy = -bb.min.y;
+        else if (bb.max.y > height) dy = height - bb.max.y;
+        if (dx || dy) {
+          Body.setPosition(b, { x: b.position.x + dx, y: b.position.y + dy });
+          Body.setVelocity(b, { x: dx ? 0 : b.velocity.x, y: dy ? 0 : b.velocity.y });
+        }
+      }
+    };
+
     const frame = (now) => {
       if (!running) return;
       const dt = Math.min(32, now - last || 16);
       last = now;
       Engine.update(engine, dt);
+      keepInside();
       render();
       raf = requestAnimationFrame(frame);
     };
