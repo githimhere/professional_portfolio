@@ -21,6 +21,69 @@ const clockText = () => {
   };
 };
 
+
+// Photographic Earth (NASA Blue Marble, public domain) drawn as a lit sphere on a small canvas.
+const SIZE = 400;
+function EarthCanvas() {
+  const cv = useRef(null);
+  useEffect(() => {
+    const canvas = cv.current;
+    if (!canvas) return undefined;
+    const ctx = canvas.getContext('2d');
+    let raf = 0; let dead = false; let last = 0;
+    const img = new Image();
+    img.decoding = 'async';
+    img.onload = () => {
+      if (dead) return;
+      const W = img.naturalWidth; const H = img.naturalHeight;
+      const tc = document.createElement('canvas'); tc.width = W; tc.height = H;
+      const tx = tc.getContext('2d'); tx.drawImage(img, 0, 0);
+      const tex = new Uint32Array(tx.getImageData(0, 0, W, H).data.buffer);
+      const r = SIZE / 2; const tilt = 0.32;
+      const idx = []; const row = []; const lon = []; const shade = [];
+      for (let py = 0; py < SIZE; py += 1) {
+        for (let px = 0; px < SIZE; px += 1) {
+          const x = (px + 0.5 - r) / r; const y = (r - py - 0.5) / r;
+          const d = x * x + y * y; if (d >= 1) continue;
+          const z = Math.sqrt(1 - d);
+          const y2 = y * Math.cos(tilt) + z * Math.sin(tilt);
+          const z2 = z * Math.cos(tilt) - y * Math.sin(tilt);
+          idx.push(py * SIZE + px);
+          row.push(Math.min(H - 1, Math.max(0, Math.floor((0.5 - Math.asin(y2) / Math.PI) * H))) * W);
+          lon.push((Math.atan2(x, z2) / (2 * Math.PI)) * W);
+          shade.push(Math.min(1, 0.5 + 0.7 * Math.pow(z, 0.5)));
+        }
+      }
+      const n = idx.length;
+      const out = ctx.createImageData(SIZE, SIZE); const o32 = new Uint32Array(out.data.buffer);
+      const draw = (shift) => {
+        o32.fill(0);
+        for (let i = 0; i < n; i += 1) {
+          let t = Math.floor(lon[i] - shift) % W; if (t < 0) t += W;
+          const c = tex[row[i] + t]; const k = shade[i];
+          o32[idx[i]] = 0xff000000 | (((((c >> 16) & 255) * k) | 0) << 16) | (((((c >> 8) & 255) * k) | 0) << 8) | ((((c & 255) * k) | 0));
+        }
+        ctx.putImageData(out, 0, 0);
+      };
+      const start = W * 0.52; // roughly Africa, Europe and Asia
+      draw(-start);
+      canvas.classList.add('is-ready');
+      if (reduced()) return;
+      const t0 = performance.now();
+      const loop = (now) => {
+        raf = requestAnimationFrame(loop);
+        if (now - last < 42 || document.hidden) return;
+        last = now;
+        draw(((t0 - now) / 1000) * (W / 90) - start);
+      };
+      raf = requestAnimationFrame(loop);
+    };
+    img.src = '/earth.jpg';
+    return () => { dead = true; cancelAnimationFrame(raf); };
+  }, []);
+  return <canvas ref={cv} className="globe-earth" width={SIZE} height={SIZE} />;
+}
+
 // Classic iPhone slide-to-unlock, rebuilt in plain DOM and CSS. Transform and opacity only.
 export default function LockScreen() {
   const [locked, setLocked] = useState(() => typeof window !== 'undefined' && shouldLock());
@@ -161,7 +224,7 @@ export default function LockScreen() {
         <p className="lock-welcome">Hi, I&apos;m Vishal. Come on in.</p>
       </div>
       <div className="lock-globe" aria-hidden="true">
-        <div className="globe-land" />
+        <EarthCanvas />
         <div className="globe-shade" />
       </div>
       <div className="lock-bottom">
