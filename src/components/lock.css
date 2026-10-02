@@ -133,3 +133,11 @@ html.lock-on, html.lock-on body { overflow: hidden; }
 .lock-welcome { font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', Inter, system-ui, sans-serif; font-weight: 500; font-size: clamp(1rem, 3.3vmin, 1.7rem); letter-spacing: 0; line-height: 1.25; color: rgba(232, 238, 250, 0.92); background: none; -webkit-background-clip: border-box; background-clip: border-box; -webkit-text-fill-color: currentColor; text-shadow: none; filter: none; }
 .lock-dp { object-position: 50% 52%; }
 .lock-welcome { max-width: 15.5em; text-wrap: balance; }
+
+.lock-sp { flex: 1 1 0; min-height: 0; }
+.lock-zone { flex: 1 1 0; width: 100%; min-height: 3.2rem; display: flex; align-items: center; justify-content: center; position: relative; z-index: 1; }
+.lock-zone .lock-welcome-row { margin-top: 0; }
+@media (min-aspect-ratio: 1/1) { .lock-globe { width: clamp(12rem, 38vmin, 26rem); } }
+@media (max-height: 700px) and (max-aspect-ratio: 1/1) { .lock-globe { width: clamp(10rem, 42vmin, 30rem); } }
+@media (min-aspect-ratio: 1/1) { .lock-time { font-size: clamp(4rem, 14vmin, 8.5rem); } .lock-welcome { font-size: clamp(1rem, 2.5vmin, 1.4rem); max-width: 28em; } .lock-dp { width: 2.4rem; height: 2.4rem; } }
+@media (min-aspect-ratio: 1/1) { .lock-globe { width: clamp(11rem, 32vmin, 24rem); } }
