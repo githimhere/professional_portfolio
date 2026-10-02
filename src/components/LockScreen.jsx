@@ -230,7 +230,7 @@ export default function LockScreen() {
     if (!locked || document.getElementById('lock-font')) return;
     const l = document.createElement('link');
     l.id = 'lock-font'; l.rel = 'stylesheet';
-    l.href = 'https://fonts.googleapis.com/css2?family=Fredoka:wght@600&display=swap';
+    l.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@200;300;500&display=swap';
     document.head.appendChild(l);
   }, [locked]);
   const [lit, setLit] = useState(false);
