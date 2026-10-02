@@ -65,17 +65,7 @@
 .hl.hl-sun::before { background: rgba(255, 209, 102, 0.42); }
 .hl.hl-rose::before { background: rgba(255, 107, 154, 0.42); }
 .bold-on .hero h1 .hl::before { transform: scaleX(1) rotate(-1.5deg); transition-delay: 1s; }
-.bold-on h2.in .hl::before { transform: scaleX(1) rotate(-1.5deg); }
-.bold-on h2[data-split] .w { display: inline-block; opacity: 0; translate: 0 0.6em; scale: 0.7; rotate: 6deg; }
-.bold-on h2[data-split].in .w {
-  opacity: 1; translate: 0 0; scale: 1; rotate: 0deg;
-  transition: opacity 400ms ease, translate 800ms var(--spring), scale 800ms var(--spring), rotate 800ms var(--spring);
-  transition-delay: calc(var(--i) * 60ms);
-}
-
-/* ---------- bigger, bouncier scroll reveals ---------- */
-html.bold-on .reveal { opacity: 0; transform: translateY(54px) scale(0.93) rotate(-1deg); transition: opacity 500ms ease, transform 900ms var(--spring); }
-html.bold-on .reveal.visible { opacity: 1; transform: none; }
+.bold-on h2 .hl::before { transform: scaleX(1) rotate(-1.5deg); transition: none; }
 
 /* ---------- spring hovers ---------- */
 .project-card, .lab-card, .proof-grid article, .timeline-item, .metric-strip > *, .contact-links a, .quick-tags span, .floating-chip, .nav-links a, .resume-link {
@@ -101,9 +91,9 @@ html.bold-on .reveal.visible { opacity: 1; transform: none; }
   border-radius: 50%;
   background: var(--rose);
   vertical-align: middle;
-  animation: ping 1.6s ease-out infinite;
+  animation: ping 1.6s ease-in-out infinite;
 }
-@keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(255, 107, 154, 0.8); } 80%, 100% { box-shadow: 0 0 0 0.6rem rgba(255, 107, 154, 0); } }
+@keyframes ping { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
 /* ---------- hero stickers ---------- */
 .sticker-layer { position: absolute; inset: 0; pointer-events: none; z-index: 6; }
@@ -112,7 +102,6 @@ html.bold-on .reveal.visible { opacity: 1; transform: none; }
   top: 3%; right: 1%;
   width: clamp(5.6rem, 11vw, 7.6rem); aspect-ratio: 1;
   color: var(--sun); rotate: 12deg;
-  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.5));
 }
 .sticker-burst .burst-shape { position: absolute; inset: 0; width: 100%; height: 100%; animation: spin 18s linear infinite; }
 .sticker-burst span {
@@ -147,13 +136,13 @@ html.bold-on .reveal.visible { opacity: 1; transform: none; }
 .tape-wrap { position: relative; height: 8.2rem; margin: 0.5rem 0 1rem; overflow: clip; }
 .tape {
   position: absolute; left: -5%; width: 110%;
-  overflow: hidden; border-block: 2px solid #101114;
+  overflow: visible; border-block: 2px solid #101114;
   font-family: 'Space Grotesk', Inter, sans-serif; font-weight: 800; text-transform: uppercase;
-  color: #101114; box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+  color: #101114;
 }
 .tape-a { top: 0.7rem; background: var(--sun); rotate: -2.2deg; }
 .tape-b { top: 3.9rem; background: var(--mint); rotate: 1.8deg; }
-.tape-track { display: flex; width: max-content; padding: 0.7rem 0; font-size: clamp(1.1rem, 2.4vw, 1.6rem); animation: tape-left 22s linear infinite; }
+.tape-track { will-change: transform; display: flex; width: max-content; padding: 0.7rem 0; font-size: clamp(1.1rem, 2.4vw, 1.6rem); animation: tape-left 22s linear infinite; }
 .tape-b .tape-track { animation-name: tape-right; animation-duration: 26s; }
 .tape-track span { display: inline-flex; align-items: center; white-space: nowrap; padding: 0 0.9rem; }
 .tape-track i { font-style: normal; margin-left: 1.8rem; display: inline-block; animation: spin 5s linear infinite; }
@@ -161,13 +150,6 @@ html.bold-on .reveal.visible { opacity: 1; transform: none; }
 @keyframes tape-left { to { transform: translateX(-50%); } }
 @keyframes tape-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 
-/* ---------- margin doodles ---------- */
-.doodle {
-  position: absolute; left: var(--x); top: var(--y); z-index: -1;
-  font-size: var(--s); line-height: 1; opacity: 0.55; pointer-events: none;
-  animation: doodle-bob 5s ease-in-out var(--d) infinite;
-}
-@keyframes doodle-bob { 0%, 100% { transform: translateY(0) rotate(-12deg); } 50% { transform: translateY(-16px) rotate(18deg); } }
 .burst-particle { position: fixed; z-index: 9999; pointer-events: none; font-size: 1.3rem; line-height: 1; }
 
 /* ---------- bigger playground header ---------- */
@@ -207,17 +189,14 @@ html.bold-on .reveal.visible { opacity: 1; transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .tape-track, .tape-track i, .sticker, .sticker *, .spark, .doodle, .play-teasers .play-chip, .play-hint, .play-head .eyebrow,
+  .tape-track, .tape-track i, .sticker, .sticker *, .spark, .play-teasers .play-chip, .play-hint, .play-head .eyebrow,
   .hero-actions .primary-button::after, .nav-links a[href="#play"]::after { animation: none !important; }
   .hero-actions a, .project-card, .lab-card, .proof-grid article, .timeline-item, .metric-strip > *, .floating-chip { transition: none !important; scale: none !important; rotate: none !important; }
-  .doodle { display: none; }
 }
 
 /* ---------- no sideways panning on real phones ---------- */
-html, body { overflow-x: clip; max-width: 100%; }
 main { overflow-x: clip; }
 .tape-wrap { overflow: hidden; contain: paint; width: 100%; }
-.doodle { left: min(var(--x), calc(100% - 3.2rem)); }
 
 /* ---------- "grab me" affordance: chips tremble in bursts, hand drags back and forth ---------- */
 .play-teasers .play-chip { animation: chip-bob 3.4s ease-in-out var(--d) infinite, chip-jiggle 2.6s ease-in-out var(--d) infinite; cursor: grab; }
@@ -253,3 +232,13 @@ main { overflow-x: clip; }
 .vendor-sinch { --c: var(--mint); animation-delay: 0.6s; }
 .vendor-pill:hover { scale: 1.1; rotate: -3deg; }
 @media (prefers-reduced-motion: reduce) { .vendor-pill { animation: none !important; transition: none !important; } }
+
+/* ---------- scroll performance ---------- */
+/* animations on blocks that are off screen are paused, so scrolling only pays for what is visible */
+.is-offscreen, .is-offscreen * { animation-play-state: paused !important; }
+/* touch devices: no live blur or blend layers over the scrolling page */
+@media (hover: none), (pointer: coarse) {
+  .site-header, .resume-link, .play-stage, .nav-links.is-open { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+  .site-header { background: rgba(4, 5, 8, 0.94); }
+  .cursor-glow { display: none !important; }
+}
