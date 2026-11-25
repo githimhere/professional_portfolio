@@ -6,10 +6,11 @@ const Hero = () => {
     <section className="hero" id="home">
       <div className="hero-copy">
         <p className="eyebrow">Marketing automation / Enterprise delivery / GenAI operations</p>
-        <h1>I turn complex marketing platforms into reliable growth engines.</h1>
+        <h1>Vishal Das turns complex marketing platforms into reliable growth engines.</h1>
         <p className="hero-text">
-          Delivery Manager helping teams launch cleaner campaigns, stronger automation,
-          and smarter customer journeys across enterprise MarTech stacks.
+          Delivery Manager for marketing automation and digital marketing, helping teams
+          launch cleaner campaigns, stronger automation, and smarter customer journeys
+          across enterprise MarTech stacks.
         </p>
         <div className="hero-actions">
           <a className="primary-button magnetic" href="#work">Explore Work</a>
